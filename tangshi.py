@@ -62,7 +62,7 @@ def parse_detail_page(html):
     file = open('tangshi.txt', 'a', encoding='utf-8')
     file.write(name + '\n' + author + content + "译文：" + translation + '\n' + "作者：" + author_life)
     file.write('\n' + '=' * 50 + '\n')
-    print("输出chengg")
+    print("输出成功")
     file.close()
 
 
