@@ -2,7 +2,7 @@ import requests
 import re
 from requests.exceptions import RequestException
 
-
+#请求网页
 def get_page():
     url = 'https://www.gushiwen.org/gushi/tangshi.aspx'
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -16,7 +16,7 @@ def get_page():
         return None
 
 def parse_page(html):
-    pattern = re.compile('<span><a href="(.*?)" target="_blank">(.*?)</a>(.*?)</span>',re.S)
+    pattern = re.compile('<span><a href="(.*?)" target="_blank">(.*?)</a>(.*?)</span>',re.S) #将正则字符串编译为正则表达式对象，包含换行字符串
     datas = re.findall(pattern, html)
     for data in datas:
         yield  data[0]
@@ -31,10 +31,11 @@ def get_detail_page(url):
     except RequestException:
         print('请求出错', url)
         return None
-
+#定义解析方法并且写入TXT文档
 def parse_detail_page(html):
     data = re.findall('<h1 style=".*?">(.*?)</h1>', html, re.S)
     data1 = re.findall('<p class="source"><a href=.*?>(.*?)</a><span>(.*?)</span><a href=.*?>(.*?)</a>', html, re.S)
+    # 防止因为列表为空导致程序报错
     if data1:
         data1 = data1[0]
     else:
